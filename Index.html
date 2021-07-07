@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+  <title>Trials of DOM interaction</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1"> 
+
+<body>
+<!-- this is one block of useful stuff: -->
+<p>This page uses the addEventListener() method make something happen when you click anywhere within the page.<br>There's no limit to how many times you click. </p>
+
+<p><strong>Note:</strong> The addEventListener() method is not supported in Internet Explorer 8 and earlier versions.</p>
+<br><br>
+
+<div id="helloWorld"></div> <br><br>
+<!-- form input for text:  -->
+
+<form>
+  <label for="usefulInput">Please provide your input here then click submit to see it get spit it out again with other poetry: </label><br>
+  <input type="text" id="usefulInput" name="usefulInput" size="100" value="default value" ><br>
+</form>
+<br>
+<button onclick="cleanAndLower()">Click here to count and clean words</button><button onclick= "loveInput ()">Click here to reprint original below</button>
+<br><br>
+<p id="demo"></p>
+<br>
+<p>The number of words in your input is:</p>
+<p id="wordNumber"></p><br><br>
+
+<input type="button" onclick="alert('You clicked me! How cunning of you!')" value="Try this button for an annoying pop up alert">
+<br><br>
+<button onclick= "helloWorld ()">Adds that famous phrase in the empty space above but only works once</button>
+<br><br>
+
+<script>
+
+function cleanAndLower() {
+  var string = document.getElementById("usefulInput").value;
+  var next = string.toLowerCase();
+  var respondingstring  = next.replace(/[^A-Za-z0-9\s]/g,"")
+  document.getElementById("demo").innerHTML = respondingstring;
+
+  var stringArray1= respondingstring.split(' ')
+  document.getElementById("wordNumber").innerHTML = stringArray1.length;
+  return stringArray1;
+
+}
+
+document.addEventListener("click", myFunction)
+//or use document.body.onload = myFunction;
+
+function myFunction() {
+    
+//Random poetry for my girlfriend Bunny
+
+let randomBodyParts = ["finger","gaze","nose","hair","mouth","bumbum","heart","love","cooking"];
+let randomAdjectives = ["beautiful","smart","wobbly","joyous","fantastic","stubborn","persistent","wonderful"];
+let randomWords = ["boat", "building","window","coffee","hole puncher","sequoia","wedding","facemask","sitcom","lollipop"];
+
+//pick a random body part from the array:
+
+let randomBodyPart = randomBodyParts[Math.floor(Math.random() * randomBodyParts.length)];
+let randomPraise = randomAdjectives[Math.floor(Math.random() * randomAdjectives.length)];
+let randomWord = randomWords[Math.floor(Math.random() * randomWords.length)];
+
+//Join all the random strings into a sentence
+
+let RandomPoetry = "Bunny's "+randomBodyPart+ " is like a "+randomPraise+ " "+ randomWord +"!"
+   //create a new div element
+  const newDiv = document.createElement("div");
+  const newContent = document.createTextNode(RandomPoetry);
+  //add the text node to the newly created div in the line below
+  newDiv.appendChild(newContent);
+  //add the newly created element and its content into the DOM (so we can refer to it later)
+  const currentDiv=document.getElementById("div1");
+  document.body.insertBefore(newDiv,currentDiv);
+}
+
+function helloWorld() {
+
+ const buttonAction = document.getElementById("helloWorld").innerHTML = ("Hello World! ");
+
+};
+
+function loveInput (){
+  const thingy = document.getElementById("usefulInput").value;
+  console.log(thingy);
+  const newDiv = document.createElement("div");
+  const newContent = document.createTextNode(thingy);
+  //add the text node to the newly created div in the line below
+  newDiv.appendChild(newContent);
+  //add the newly created element and its content into the DOM (so we can refer to it later)
+  const currentDiv=document.getElementById("div1");
+  document.body.insertBefore(newDiv,currentDiv);
+}
+</script>
+</body>
+</html>
+
